@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken')
+const secret_key= 'Zam1911lekbest'
 app.use(cors({
     origin:"http://localhost:3000",
     credentials:true
@@ -128,20 +129,18 @@ app.put(`/products/update/:id/:price`,verifyToken,(req, res) => {
     });
 });
 
-
-
-
-app.get(`/product/search`, (req, res) => {
-  let query = `SELECT * FROM PRODUCT WHERE QUANTITY > 0`;
-
+app.get(`/product/view`, (req, res) => {
+    let query = `SELECT * FROM PRODUCT`; 
+  
     db.all(query, (err, rows) => {
-        if (err) {
-            console.log(err);
-            return res.status(500).send("Error occurred while Viewing for products");
-        }
-        return res.status(200).json(rows); 
+      if (err) {
+        console.log(err);
+        return res.status(500).send("Error occurred while viewing products");
+      }
+      return res.status(200).json(rows); 
     });
-});
+  });
+  
 
 app.delete('/admin/delete-product/:id',verifyToken, (req, res) => {
     const isAdmin = req.userDetails.isAdmin;
@@ -361,7 +360,7 @@ app.post("/wishlist/add", (req, res) => {
     const userId = req.body.userId;
     const productId = req.body.productId;
 
-    let query = `INSERT INTO WISHLIST (USER_ID, PRODUCT_ID) VALUES ('${userId}', '${productId}')`;
+    let query = `INSERT INTO WISHLIST (USER_ID, PRODUCT_ID) VALUES ('?', '?')`;
 
     db.run(query, (err) => {
         if (err) {
@@ -389,7 +388,7 @@ app.delete("/wishlist/remove/:userId/:productId", (req, res) => {
     const userId = req.params.userId;
     const productId = req.params.productId;
 
-    let query = `DELETE FROM WISHLIST WHERE USER_ID = ${userId} AND PRODUCT_ID = ${productId}`;
+    let query = `DELETE FROM WISHLIST WHERE USER_ID = ? AND PRODUCT_ID = ?`;
 
     db.run(query, (err) => {
         if (err) {
@@ -412,7 +411,7 @@ app.post("/players/add", verifyToken,(req, res) => {
     const bio = req.body.bio
     const photo = req.body.photo
 
-    let query = `INSERT INTO Players (Name, Position, Nationality, Bio, photo) 
+    let query = `INSERT INTO PLAYERS (NAME, POSTION, NATIONALITY, BIO, PHOTO) 
                  VALUES ('?', '?', '?', '?', '?')`;
 
     db.run(query, function(err) {
@@ -444,6 +443,17 @@ app.delete("/players/delete/:id",verifyToken, (req, res) => {
         return res.status(200).send("Player deleted from successfully");
     });
 });
+app.get(`/player/view`, (req, res) => {
+    let query = `SELECT * FROM PLAYERS`; 
+  
+    db.all(query, (err, rows) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).send("Error occurred while viewing products");
+      }
+      return res.status(200).json(rows); 
+    });
+  });
 
 app.listen(port,()=>{
     console.log(`App started at port ${port}`)
