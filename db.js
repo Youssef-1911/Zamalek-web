@@ -56,7 +56,7 @@ const createProductTable = `
     )`;
     
     const createPlayersTable =`
-    CREATE TABLE Players (
+    CREATE TABLE IF NOT EXISTS Players (
         ID INTEGER PRIMARY KEY AUTOINCREMENT,
         Name TEXT NOT NULL,
         Position TEXT,
