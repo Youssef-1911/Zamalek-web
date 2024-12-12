@@ -7,6 +7,8 @@ import './Components/LoginForm.css'
 import './Components/Home.css'
 import './Components/NavBar.css'
 import './Components/RegistrationForm.css'
+import './Components/AdminPage.css'
+
 
 
 

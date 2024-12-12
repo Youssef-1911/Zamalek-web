@@ -58,12 +58,13 @@ const createProductTable = `
     const createPlayersTable =`
     CREATE TABLE IF NOT EXISTS Players (
         ID INTEGER PRIMARY KEY AUTOINCREMENT,
-        Name TEXT NOT NULL,
-        Position TEXT,
-        Nationality TEXT,
-        Bio TEXT,
-        Photo TEXT 
-    )`
+        NAME TEXT NOT NULL,
+        POSITION TEXT NOT NULL,
+        NATIONALITY TEXT NULL,
+        BIO TEXT NOT NULL,
+        PHOTO INTGER NULL
+        
+    )`;
     
     
 module.exports={db,createUserTable,createProductTable,createCartTable,createOrdersTable,createWishlistTable,createPlayersTable}

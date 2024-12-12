@@ -85,19 +85,16 @@ app.post("/user/login", (req, res) => {
         })
     })
 })
-app.post(`/products/add`, verifyToken,  (req, res) => {
-    const isAdmin = req.userDetails.isAdmin;
-    if (isAdmin !== 1)
-        return res.status(403).send("you are not an admin")
+app.post(`/products/add`, (req, res) => {
     let name = req.body.name;
     let description = req.body.description;
     let price = req.body.price;
     let quantity = req.body.quantity;
-    let photo = req.body.photo;
+    let photo = req.body.photo
     let query = `INSERT INTO PRODUCT (NAME, DESCRIPTION, PRICE, QUANTITY, PHOTO) 
-                 VALUES (?, ?, ?, ?, ?)`;
+                 VALUES (?, ?, ?, ?,?)`;
 
-    db.run(query, [name, description, parseFloat(price), parseInt(quantity, 10), photo], function (err) {
+    db.run(query, [name, description, parseFloat(price), parseInt(quantity, 10),photo], function (err) {
         if (err) {
             console.log(err);
             return res.json({ error: err.message });
@@ -106,14 +103,21 @@ app.post(`/products/add`, verifyToken,  (req, res) => {
         }
     });
 });
+app.get(`/users/view`, (req, res) => {
+    let query = `SELECT * FROM USER`; 
+  
+    db.all(query, (err, rows) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).send("Error occurred while viewing users");
+      }
+      return res.status(200).json(rows); 
+    });
+  });
 
-
-app.put(`/products/update/:id/:price`,verifyToken,(req, res) => {
-    const isAdmin = req.userDetails.isAdmin;
-    if (isAdmin !== 1)
-        return res.status(403).send("you are not an admin")
-    const productId = req.params.id;
-    const newPrice = parseFloat(req.params.price);
+app.put(`/products/update/:id/:price`,(req, res) => {
+     const productId = req.params.id;
+     const newPrice = parseFloat(req.params.price);
 
     
     const query = `UPDATE PRODUCT SET PRICE = ? WHERE ID = ?`;
@@ -142,11 +146,8 @@ app.get(`/product/view`, (req, res) => {
   });
   
 
-app.delete('/admin/delete-product/:id',verifyToken, (req, res) => {
-    const isAdmin = req.userDetails.isAdmin;
-    if (isAdmin !== 1)
-        return res.status(403).send("you are not an admin")
-    let productId = req.params.id;
+app.delete('/delete/product/:id', (req, res) => {
+     const productId = req.params.id;
     db.run(`DELETE FROM PRODUCT WHERE ID = ?`, [productId], (err) => {
         if (err) {
             console.log(err);
@@ -309,38 +310,27 @@ app.get("/orders/history/:userId", (req, res) => {
 });
 
 
-app.get("/orders/:orderId", verifyToken,(req, res) => {
-    const isAdmin = req.userDetails.isAdmin;
-    if (isAdmin !== 1)
-        return res.status(403).send("you are not an admin")
-    const orderId = req.params.orderId;
-
-   
-    const query = `SELECT * FROM ORDERS WHERE ID = ?`;
-
-   
-    db.get(query, [orderId], (err, order) => {
+app.get("/orders/view",(req, res) => {
+   const query = `SELECT * FROM ORDERS`;
+     db.all(query, (err,rows) => {
         if (err) {
             console.error("Error fetching order:", err.message);
             return res.status(500).send("Error fetching order");
         }
 
-        if (!order) {
+        if (!rows) {
             return res.status(404).send("Order not found");
         }
 
       
-        return res.status(200).json(order);
+        return res.status(200).json(rows);
     });
 });
 
 
 
 
-app.put("/order/update-status",verifyToken, (req, res) => {
-    const isAdmin = req.userDetails.isAdmin;
-    if (isAdmin !== 1)
-        return res.status(403).send("you are not an admin")
+app.put("/order/update-status", (req, res) => {
     const orderId = req.body.orderId;
     const status = req.body.status;
 
@@ -362,7 +352,7 @@ app.post("/wishlist/add", (req, res) => {
 
     let query = `INSERT INTO WISHLIST (USER_ID, PRODUCT_ID) VALUES ('?', '?')`;
 
-    db.run(query, (err) => {
+    db.run(query,[userId,productId],(err) => {
         if (err) {
             console.log(err);
             return res.status(500).send("Error adding product to wishlist");
@@ -376,7 +366,7 @@ app.get("/wishlist/user/:userId", (req, res) => {
 
     let query = `SELECT * FROM WISHLIST WHERE USER_ID = ?`;
 
-    db.all(query, (err, rows) => {
+    db.all(query,[userId] ,(err, rows) => {
         if (err) {
             console.log(err);
             return res.status(500).send("Error getting wishlist items");
@@ -390,7 +380,7 @@ app.delete("/wishlist/remove/:userId/:productId", (req, res) => {
 
     let query = `DELETE FROM WISHLIST WHERE USER_ID = ? AND PRODUCT_ID = ?`;
 
-    db.run(query, (err) => {
+    db.run(query,[userId,productId], (err) => {
         if (err) {
             console.log(err);
             return res.status(500).send("Error removing product from wishlist");
@@ -401,20 +391,17 @@ app.delete("/wishlist/remove/:userId/:productId", (req, res) => {
 });
 
 
-app.post("/players/add", verifyToken,(req, res) => {
-    const isAdmin = req.userDetails.isAdmin;
-    if (isAdmin !== 1)
-        return res.status(403).send("you are not an admin")
+app.post("/players/add",(req, res) => {
+ 
     const name = req.body.name;
     const position = req.body.position
     const nationality = req.body.nationality
     const bio = req.body.bio
     const photo = req.body.photo
+    let query = `INSERT INTO PLAYERS (NAME, POSITION, NATIONALITY, BIO, PHOTO) 
+                 VALUES (?, ?, ?, ?, ?)`;
 
-    let query = `INSERT INTO PLAYERS (NAME, POSTION, NATIONALITY, BIO, PHOTO) 
-                 VALUES ('?', '?', '?', '?', '?')`;
-
-    db.run(query, function(err) {
+    db.run(query,[name,position,nationality,bio,photo], function(err) {
         if (err) {
             console.log(err);
             return res.status(500).send("Error adding player");
@@ -422,15 +409,12 @@ app.post("/players/add", verifyToken,(req, res) => {
         return res.status(200).send("Player added to successfully");
     });
 });
-app.delete("/players/delete/:id",verifyToken, (req, res) => {
-    const isAdmin = req.userDetails.isAdmin;
-    if (isAdmin !== 1)
-        return res.status(403).send("you are not an admin")
+app.delete("/players/delete/:id", (req, res) => {
     const playerId = req.params.id; 
 
     let query = `DELETE FROM Players WHERE ID = ? `; 
 
-    db.run(query, function(err) {
+    db.run(query,[playerId], function(err) {
         if (err) {
             console.log(err);
             return res.status(500).send("Error deleting player ");
@@ -443,6 +427,7 @@ app.delete("/players/delete/:id",verifyToken, (req, res) => {
         return res.status(200).send("Player deleted from successfully");
     });
 });
+
 app.get(`/player/view`, (req, res) => {
     let query = `SELECT * FROM PLAYERS`; 
   

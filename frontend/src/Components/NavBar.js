@@ -1,5 +1,5 @@
 import React from "react";
-import "./NavBar";
+import "./NavBar.css";
 const NavBar = ({ navigate }) => {
     return (
         <nav>
@@ -9,6 +9,7 @@ const NavBar = ({ navigate }) => {
             </div>
             <div className="nav-center">
                 <h1>Zamalek SC</h1> 
+                <h2>اكبر قلعة رياضية في مصر</h2>
             </div>
             <div>
                 <ul>

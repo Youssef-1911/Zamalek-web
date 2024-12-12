@@ -1,7 +1,12 @@
 .home-section {
     text-align: center;
     padding: 20px;
-    background-color: #f9f9f9; 
+    background-image: url("C:\Users\youss\OneDrive\Attachments\Desktop\ZSC WEB APP PROJECT\BACKEND\frontend\public\images\Keep going.jpeg");
+    background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 550px;
+  width: 97%; 
 }
 
 h1 {

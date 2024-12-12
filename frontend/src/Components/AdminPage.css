@@ -1,0 +1,47 @@
+
+
+.admin-page {
+    text-align: center;
+    background-color: #f8f8f8;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .admin-page h1 {
+    color: #e32636; 
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+  
+  .admin-page p {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .admin-actions button {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: #e32636; /* Zamalek SC red */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-actions button:hover {
+    background-color: #c41e31; 
+  }
+  
+  .admin-actions button:active {
+    transform: scale(0.98);
+  }
+  

@@ -22,7 +22,7 @@ const LoginForm = ({ navigate }) => {
         if (userData.admin === 1) {
           navigate("admin-page");
         } else {
-          navigate("home");
+          navigate("user-page");
         }
       })
       .catch((error) => {
