@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const UpdateProduct = () => {
+const UpdateProduct = ({navigate}) => {
     const [productId, setProductId] = useState("");
     const [newPrice, setNewPrice] = useState("");
     const [message, setMessage] = useState("");
@@ -49,6 +49,7 @@ const UpdateProduct = () => {
         <button type="button" onClick={UpdateProduct}>Update Product</button>
       </form>
       {message && <p>{message}</p>} 
+      <button onClick={() => navigate('admin-page')}>Back to Admin page</button>
     </div>
   );
 };

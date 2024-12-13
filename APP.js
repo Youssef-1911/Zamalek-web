@@ -161,6 +161,10 @@ app.post("/cart/add", (req, res) => {
     const userId = req.body.userId;
     const productId = req.body.productId;
     const quantity = req.body.quantity;
+    
+
+  
+
 
     let query = `INSERT INTO CART (USER_ID, PRODUCT_ID, QUANTITY) VALUES (?, ?, ?)`;
 
@@ -177,7 +181,14 @@ app.post("/cart/add", (req, res) => {
 app.get("/cart/user/:userId", (req, res) => {
     const userId = req.params.userId;
 
-    const query = `SELECT * FROM CART WHERE USER_ID = ?`;
+    const query = `  SELECT 
+            CART.PRODUCT_ID, 
+            CART.QUANTITY, 
+            PRODUCT.NAME AS PRODUCT_NAME, 
+            PRODUCT.PRICE 
+        FROM CART
+        INNER JOIN PRODUCT ON CART.PRODUCT_ID = PRODUCT.ID
+        WHERE CART.USER_ID = ?`;
 
     db.all(query, [userId], (err, rows) => {
         if (err) {
@@ -189,7 +200,7 @@ app.get("/cart/user/:userId", (req, res) => {
 });
 
 
-app.delete("/cart/remove/:userId/:productId",verifyToken, (req, res) => {
+app.delete("/cart/remove/:userId/:productId", (req, res) => {
     const userId = req.params.userId;
     const productId = req.params.productId;
 
@@ -206,10 +217,7 @@ app.delete("/cart/remove/:userId/:productId",verifyToken, (req, res) => {
 });
 
 
-app.put("/cart/update",verifyToken, (req, res) => {
-    const isAdmin = req.userDetails.isAdmin;
-    if (isAdmin !== 1)
-        return res.status(403).send("you are not an admin")
+app.put("/cart/update", (req, res) => {
     const userId = req.body.userId;
     const productId = req.body.productId;
     const quantity = req.body.quantity;
@@ -251,7 +259,7 @@ app.post("/order/from-cart", (req, res) => {
 
             
             let priceQuery = `SELECT PRICE FROM PRODUCT WHERE ID = ?`;
-            const totalPrice =0;
+            let totalPrice =0;
             db.get(priceQuery, [productId], (err, product) => {
                 if (err) {
                     console.log(err);
@@ -284,12 +292,11 @@ app.post("/order/from-cart", (req, res) => {
                 console.log(err);
                 return res.status(500).send("Error clearing cart after placing order");
             }
-            return res.status(200).send({message:"Order placed successfully from cart",Price:  totalPrice });
+            return res.status(200).send({message:"Order placed successfully from cart"});
         });
     });
 });
 ;
-
 app.get("/orders/history/:userId", (req, res) => {
     const userId = req.params.userId;
 

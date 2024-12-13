@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddPlayer = () => {
+const AddPlayer = ({navigate}) => {
   const [name, setname] = useState('');
   const [position, setposition] = useState('');
   const [bio, setbio] = useState('');
@@ -72,6 +72,7 @@ const AddPlayer = () => {
         <button type="button" onClick={AddPlayer}>Add Player</button>
       </form>
       {message && <p>{message}</p>} 
+      <button onClick={() => navigate('admin-page')}>Back to Admin page</button>
     </div>
   );
 };

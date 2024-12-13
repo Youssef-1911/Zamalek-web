@@ -4,7 +4,8 @@ const NavBar = ({ navigate }) => {
     return (
         <nav>
             <div className="logo" onClick={() => navigate("home")}>
-                <img src="" alt="Zamalek SC Logo" />
+                <img src="BACKEND\frontend\public\images\Logo.jpeg" alt="Logo" />
+            
                 
             </div>
             <div className="nav-center">

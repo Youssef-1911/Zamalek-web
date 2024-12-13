@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const DeletePlayer = () => {
+const DeletePlayer = ({navigate}) => {
   const [playerId, setplayerId] = useState('');
   const [message, setMessage] = useState(''); 
 
@@ -40,6 +40,7 @@ const DeletePlayer = () => {
         <button type="button" onClick={DeletePlayer}>Delete Player</button>
       </form>
       {message && <p>{message}</p>} 
+      <button onClick={() => navigate('admin-page')}>Back to Admin page</button>
     </div>
   );
 };

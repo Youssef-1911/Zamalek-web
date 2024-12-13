@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 
 
-const Vieworders = () => {
+const Vieworders = ({navigate}) => {
   const [orders, setorders] = useState([]);
 
   const Vieworders = () => {
@@ -45,6 +45,7 @@ const Vieworders = () => {
           </li>
         ))}
       </ul>
+      <button onClick={() => navigate('admin-page')}>Back to Admin page</button>
     </div>
   );
 };

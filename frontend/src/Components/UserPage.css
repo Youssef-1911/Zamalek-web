@@ -1,9 +1,11 @@
-.admin-page {
+
+
+.User-page {
     text-align: center;
     background-color: #f8f8f8;
     padding: 20px;
     font-family: Arial, sans-serif;
-    background-image: url("C:\Users\youss\OneDrive\Attachments\Desktop\ZSC WEB APP PROJECT\BACKEND\frontend\public\images\119Years.jpeg");
+    background-image: url("C:\Users\youss\OneDrive\Attachments\Desktop\ZSC WEB APP PROJECT\BACKEND\frontend\public\images\Fans.jpeg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -11,41 +13,35 @@
     width: 97%; 
   }
   
-  .admin-page h1 {
-    color: black; 
-    font-size: 2.5em;
+  .User-page h1 {
+    color: red; 
+    font-size: 3.5em;
     margin-bottom: 10px;
   }
   
-  .admin-page p {
-    font-size: 1.2em;
-    color: #333;
-    margin-bottom: 20px;
-  }
   
-  .admin-actions {
+  .User-actions {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
   }
   
-  .admin-actions button {
+  .User-actions button {
     padding: 10px 20px;
     font-size: 1em;
     border: none;
     border-radius: 5px;
-    background-color: #e32636; 
+    background-color: #e32636;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
-  .admin-actions button:hover {
+  .User-actions button:hover {
     background-color: #c41e31; 
   }
   
-  .admin-actions button:active {
+  .User-actions button:active {
     transform: scale(0.98);
   }
-  

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-const ViewUsers = () => {
+const ViewUsers = ({navigate}) => {
   const [users, setusers] = useState([]);
 
   const fetchUsers = () => {
@@ -28,6 +28,7 @@ const ViewUsers = () => {
 
     return (
         <div>
+          <button onClick={() => navigate('admin-page')}>Back to Admin</button>
             <h1>All Users</h1>
             <ul>
                 {users.map((user) => (
@@ -38,6 +39,7 @@ const ViewUsers = () => {
                     </li>
                 ))}
             </ul>
+            <button onClick={() => navigate('admin-page')}>Back to Admin page</button>
         </div>
     );
 };

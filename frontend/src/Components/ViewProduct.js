@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 
 
-const ViewProduct = () => {
+
+const ViewProduct = ({navigate}) => {
   const [products, setProducts] = useState([]);
 
   const ViewProduct = () => {
@@ -29,6 +30,7 @@ const ViewProduct = () => {
 
   return (
     <div>
+     
       <h1>View All Products</h1>
       <ul>
         {products.map((product) => (
@@ -41,6 +43,7 @@ const ViewProduct = () => {
           </li>
         ))}
       </ul>
+      <button onClick={() => navigate('admin-page')}>Back to Admin page</button>
     </div>
   );
 };

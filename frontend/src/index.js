@@ -8,6 +8,8 @@ import './Components/Home.css'
 import './Components/NavBar.css'
 import './Components/RegistrationForm.css'
 import './Components/AdminPage.css'
+import'./Components/UserPage.css'
+import './Components/Store.css'
 
 
 

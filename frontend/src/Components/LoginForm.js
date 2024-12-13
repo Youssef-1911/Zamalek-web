@@ -32,6 +32,7 @@ const LoginForm = ({ navigate }) => {
   };
 
   return (
+    <div className="background-container">
     <div className="form-section">
       <h3>User Login</h3>
       <form>
@@ -55,6 +56,8 @@ const LoginForm = ({ navigate }) => {
       </form>
       <p>{message}</p>
     </div>
+    </div>
+      
   );
 };
 

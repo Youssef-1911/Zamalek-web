@@ -1,4 +1,12 @@
-
+.background-container {
+    background-image: url('C:\Users\youss\OneDrive\Attachments\Desktop\ZSC WEB APP PROJECT\BACKEND\frontend\public\images\Team.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 500px;
+    width: 100%; 
+    padding: 20px;
+}
 .form-section {
     width: 300px;
     margin: 50px auto;
@@ -8,6 +16,7 @@
     background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-family: Arial, sans-serif;
+  
 }
 
 h3 {

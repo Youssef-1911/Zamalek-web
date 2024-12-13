@@ -4,6 +4,7 @@ import "./AddPlayer";
 import "./AddProduct"
 import "./DeletePlayer"
 import "./ViewProduct"
+import "./ViewUsers"
 
 
 const AdminPage = ({ navigate }) => {
