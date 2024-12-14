@@ -30,22 +30,37 @@ const Vieworders = ({navigate}) => {
   return (
     <div>
       <h1>View All Orders</h1>
-      <ul>
-        {orders.map((order) => (
-          <li key={order.ID}>
-            <strong>Order ID:</strong> {order.ID} <br />
-            <strong>User ID:</strong> {order.USER_ID} <br />
-            <strong>Product ID :</strong>{order.PRODUCT_ID}<br/>
-            <strong>Quantity:</strong> {order.QUANTITY}<br />
-            <strong>Total Price:</strong>{order.TOTAL_PRICE} <br />
-            <strong>Username:</strong>{order.NAME}<br/>
-            <strong>ADDRESS:</strong>{order.ADDRESS}<br/>
-            <strong>PAYMENT_METHOD:</strong>{order.PAYMENT_METHOD}<br/>
-            <strong>Order status:</strong>{order.STATUS}<br/>
-          </li>
-        ))}
-      </ul>
-      <button onClick={() => navigate('admin-page')}>Back to Admin page</button>
+      <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>User ID</th>
+              <th>Product ID</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
+              <th>Username</th>
+              <th>Address</th>
+              <th>Payment Method</th>
+              <th>Order Status</th>
+            </tr>
+            </thead>
+          <tbody>
+            {orders.map((order) => (
+              <tr key={order.ID}>
+                <td>{order.ID}</td>
+                <td>{order.USER_ID}</td>
+                <td>{order.PRODUCT_ID}</td>
+                <td>{order.QUANTITY}</td>
+                <td>{order.TOTAL_PRICE}</td>
+                <td>{order.NAME}</td>
+                <td>{order.ADDRESS}</td>
+                <td>{order.PAYMENT_METHOD}</td>
+                <td>{order.STATUS}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+          <button onClick={() => navigate('admin-page')}>Back to Admin page</button>
     </div>
   );
 };

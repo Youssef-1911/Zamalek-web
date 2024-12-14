@@ -25,23 +25,37 @@ const ViewUsers = ({navigate}) => {
   useEffect(() => {
     fetchUsers();
   }, []);
-
-    return (
-        <div>
-          <button onClick={() => navigate('admin-page')}>Back to Admin</button>
-            <h1>All Users</h1>
-            <ul>
-                {users.map((user) => (
-                    <li key={user.ID}>
-                        <strong>ID:</strong> {user.ID} <br />
-                        <strong>Username:</strong> {user.NAME} <br />
-                        <strong>Email:</strong> {user.EMAIL} <br />
-                    </li>
-                ))}
-            </ul>
-            <button onClick={() => navigate('admin-page')}>Back to Admin page</button>
-        </div>
-    );
+  return (
+    <div className="users-container">
+      <h1>All Users</h1>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.ID}>
+                <td>{user.ID}</td>
+                <td>{user.NAME}</td>
+                <td>{user.EMAIL}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <button className="back-button" onClick={() => navigate('admin-page')}>
+        Back to Admin page
+      </button>
+    </div>
+  );
 };
+
+
+  
 
 export default ViewUsers;

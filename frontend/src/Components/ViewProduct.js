@@ -27,26 +27,39 @@ const ViewProduct = ({navigate}) => {
   useEffect(() => {
     ViewProduct();
   }, []);
-
-  return (
-    <div>
-     
-      <h1>View All Products</h1>
-      <ul>
-        {products.map((product) => (
-          <li key={product.ID}>
-            <strong>Name:</strong> {product.NAME} <br />
-            <strong>Description:</strong> {product.DESCRIPTION} <br />
-            <strong>Price:</strong> ${product.PRICE} <br />
-            <strong>Quantity:</strong> {product.QUANTITY}<br /> 
-            <strong>Product ID :</strong>{product.ID}
-          </li>
-        ))}
-      </ul>
-      <button onClick={() => navigate('admin-page')}>Back to Admin page</button>
-    </div>
-  );
-};
+    return (
+      <div>
+        <h1>View All Products</h1>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product.ID}>
+                  <td>{product.ID}</td>
+                  <td>{product.NAME}</td>
+                  <td>{product.DESCRIPTION}</td>
+                  <td>${product.PRICE}</td>
+                  <td>{product.QUANTITY}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <button className="back-button" onClick={() => navigate('admin-page')}>
+          Back to Admin page
+        </button>
+      </div>
+    );
+  };
 
 export default ViewProduct;
 

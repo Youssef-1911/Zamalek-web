@@ -85,7 +85,7 @@ app.post("/user/login", (req, res) => {
         })
     })
 })
-app.post(`/products/add`, (req, res) => {
+app.post(`/products/add`,verifyToken, (req, res) => {
     let name = req.body.name;
     let description = req.body.description;
     let price = req.body.price;
@@ -367,7 +367,7 @@ app.post("/wishlist/add", (req, res) => {
 app.get("/wishlist/user/:userId", (req, res) => {
     const userId = req.params.userId;
 
-    let query = `        SELECT WISHLIST.PRODUCT_ID, PRODUCT.NAME, PRODUCT.DESCRIPTION, PRODUCT.PRICE
+    let query = `SELECT WISHLIST.PRODUCT_ID, PRODUCT.NAME, PRODUCT.DESCRIPTION, PRODUCT.PRICE
         FROM WISHLIST
         INNER JOIN PRODUCT ON WISHLIST.PRODUCT_ID = PRODUCT.ID
         WHERE WISHLIST.USER_ID = ?`;
