@@ -10,9 +10,7 @@ import "./ViewUsers"
 const AdminPage = ({ navigate }) => {
   return (
     <div className="admin-page">
-      <h1>Zamalek Sc Admin Page</h1>
-      <p>Select an action below:</p>
-      <div className="admin-actions">
+     <div className="admin-actions">
         <button onClick={()=>navigate("view-Users")}>View Users</button>
         <button onClick={()=> navigate("add-player")}>Add Player</button>
         <button onClick={() => navigate("delete-player")}>Delete player</button>

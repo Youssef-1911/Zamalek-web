@@ -9,15 +9,11 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 550px;
-    width: 97%; 
+    height: 580px;
+    width: 97.5%; 
   }
   
-  .User-page h1 {
-    color: red; 
-    font-size: 3.5em;
-    margin-bottom: 10px;
-  }
+
   
   
   .User-actions {
@@ -32,7 +28,7 @@
     font-size: 1em;
     border: none;
     border-radius: 5px;
-    background-color: #e32636;
+    background-color: black;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -42,6 +38,3 @@
     background-color: #c41e31; 
   }
   
-  .User-actions button:active {
-    transform: scale(0.98);
-  }

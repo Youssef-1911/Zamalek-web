@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import "./Store.css"
 
 
 
@@ -69,7 +70,7 @@ const ViewProduct = ({navigate}) => {
 
 
   return (
-    <div>
+    <div className='club-store'>
       <h1>Club Store</h1>
       <ul>
         {products.map((product) => (
@@ -77,7 +78,9 @@ const ViewProduct = ({navigate}) => {
             <strong>Name:</strong> {product.NAME} <br />
             <strong>Description:</strong> {product.DESCRIPTION} <br />
             <strong>Price:</strong> ${product.PRICE} <br />
+               
             <button onClick={() => addToCart(product.ID)}>Add to Cart</button>
+            
             <button onClick={() => addToWishlist(product.ID)}>Add to Wishlist</button>
           </li>
         ))}

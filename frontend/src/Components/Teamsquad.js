@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import "./Teamsquad.css"
 
 
 
@@ -29,7 +30,7 @@ const ViewTeam = ({navigate}) => {
   }, []);
 
   return (
-    <div>
+    <div className='player-view'>
       <h1>Team Players</h1>
       <h2>فرسان ميت عقبه</h2>
       <ul>

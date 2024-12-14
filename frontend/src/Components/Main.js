@@ -11,12 +11,14 @@ import DeletePlayer from "./DeletePlayer";
 import ViewProduct from "./ViewProduct";
 import DeleteProduct from "./DeleteProduct";
 import UpdateProduct from "./UpdateProduct";
-import Vieworders from "./ViewOrders";
+import ViewOrders from "./ViewOrders";
 import UpdateStatus from "./UpdateOrderStatus";
 import ViewUsers from "./ViewUsers";
 import Store from "./Store";
 import Teamsquad from "./Teamsquad"
 import Viewcart from "./Viewcart"
+import Myorders from "./Myorders"
+import ViewWhishlist from "./ViewWhishlsit"
 
 
 const Main = ()=>{
@@ -32,7 +34,7 @@ const Main = ()=>{
             currentPage=<AdminPage navigate={setPage}/>
         else if(page==='user-page')
             currentPage=<UserPage navigate={setPage}/>   
-            else if(page==='view-users')
+            else if(page==='view-Users')
                 currentPage=<ViewUsers navigate={setPage}/>
             else if (page==='add-player')
                 currentPage=<AddPlayer navigate={setPage}/>
@@ -46,8 +48,8 @@ const Main = ()=>{
                 currentPage=<DeleteProduct navigate={setPage}/>
             else if (page==='update-product')
                 currentPage=<UpdateProduct navigate={setPage}/>
-            else if (page==='view-orders ') 
-                currentPage=<Vieworders navigate={setPage}/>   
+            else if (page==='view-orders') 
+                currentPage=<ViewOrders navigate={setPage}/>   
             else if (page==='update-order')
                 currentPage=<UpdateStatus navigate={setPage}/>
             else if(page==='store-products') 
@@ -56,6 +58,10 @@ const Main = ()=>{
                 currentPage=<Teamsquad navigate={setPage}/>
             else if (page==='view-cart')   
                 currentPage=<Viewcart navigate={setPage}/> 
+            else if (page==='view-myorders')
+                currentPage=<Myorders navigate={setPage}/>
+            else if (page==='view-whishlist')
+                currentPage=<ViewWhishlist navigate={setPage}/>
     return(
         <div>
         <NavBar navigate={setPage}/>

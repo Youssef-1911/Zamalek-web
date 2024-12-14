@@ -34,7 +34,7 @@ const ViewUsers = ({navigate}) => {
                 {users.map((user) => (
                     <li key={user.ID}>
                         <strong>ID:</strong> {user.ID} <br />
-                        <strong>Username:</strong> {user.USERNAME} <br />
+                        <strong>Username:</strong> {user.NAME} <br />
                         <strong>Email:</strong> {user.EMAIL} <br />
                     </li>
                 ))}

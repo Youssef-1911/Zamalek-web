@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
+import "./Viewcart.css"
 
 const CartView = ({navigate}) => {
   const [cartItems, setCartItems] = useState([]);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
-  const userId = 7; // Replace with dynamic user ID if available
+  const userId = 7; 
 
-  // Fetch cart items
   const fetchCartItems = () => {
     fetch(`http://localhost:1911/cart/user/${userId}`)
       .then((response) => {
@@ -22,7 +22,7 @@ const CartView = ({navigate}) => {
       .catch((error) => console.error("Error fetching cart items:", error));
   };
 
-  // Remove item from cart
+ 
   const removeFromCart = (productId) => {
     fetch(`http://localhost:1911/cart/remove/${userId}/${productId}`, {
       method: "DELETE",
@@ -30,7 +30,7 @@ const CartView = ({navigate}) => {
       .then((response) => {
         if (response.ok) {
           alert("Item removed from cart");
-          fetchCartItems(); // Refresh cart
+          fetchCartItems();
         } else {
           console.error("Failed to remove item from cart");
         }
@@ -38,7 +38,6 @@ const CartView = ({navigate}) => {
       .catch((error) => console.error("Error removing item from cart:", error));
   };
 
-  // Update quantity in cart
   const updateQuantity = (productId, quantity) => {
     if (quantity < 1) {
       alert("Quantity must be at least 1");
@@ -52,7 +51,7 @@ const CartView = ({navigate}) => {
       .then((response) => {
         if (response.ok) {
           alert("Quantity updated");
-          fetchCartItems(); // Refresh cart
+          fetchCartItems(); 
         } else {
           console.error("Failed to update quantity");
         }
@@ -60,7 +59,7 @@ const CartView = ({navigate}) => {
       .catch((error) => console.error("Error updating quantity:", error));
   };
 
-  // Place order from cart
+ 
   const placeOrder = (e) => {
     e.preventDefault();
 
@@ -77,7 +76,7 @@ const CartView = ({navigate}) => {
       .then((response) => {
         if (response.ok) {
           alert("Order placed successfully!");
-          fetchCartItems(); // Clear cart in frontend
+          fetchCartItems();
           setName("");
           setAddress("");
           setPaymentMethod("");
@@ -91,12 +90,18 @@ const CartView = ({navigate}) => {
       .catch((error) => console.error("Error placing order:", error));
   };
 
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => {
+      return total + (item.QUANTITY * item.PRICE);
+    }, 0).toFixed(2);
+  };
+
   useEffect(() => {
     fetchCartItems();
   }, []);
 
   return (
-    <div>
+    <div className="cart-container">
       <h1>My Cart</h1>
       {cartItems.length > 0 ? (
         <>
@@ -132,8 +137,12 @@ const CartView = ({navigate}) => {
                   </td>
                 </tr>
               ))}
+
             </tbody>
           </table>
+          <div className="order-total">
+            <h3>Total Order Price: ${calculateTotal()}</h3>
+          </div>
 
           <h2>Place Your Order</h2>
           <form onSubmit={placeOrder}>
@@ -164,7 +173,7 @@ const CartView = ({navigate}) => {
                 required
               />
             </div>
-            <button type="submit" style={{ marginTop: "10px" }}>
+            <button type="submit" >
               Place Order
             </button>
           </form>

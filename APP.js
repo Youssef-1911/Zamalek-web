@@ -162,10 +162,6 @@ app.post("/cart/add", (req, res) => {
     const productId = req.body.productId;
     const quantity = req.body.quantity;
     
-
-  
-
-
     let query = `INSERT INTO CART (USER_ID, PRODUCT_ID, QUANTITY) VALUES (?, ?, ?)`;
 
     
@@ -357,7 +353,7 @@ app.post("/wishlist/add", (req, res) => {
     const userId = req.body.userId;
     const productId = req.body.productId;
 
-    let query = `INSERT INTO WISHLIST (USER_ID, PRODUCT_ID) VALUES ('?', '?')`;
+    let query = `INSERT INTO WISHLIST (USER_ID, PRODUCT_ID) VALUES (?, ?)`;
 
     db.run(query,[userId,productId],(err) => {
         if (err) {
@@ -371,7 +367,10 @@ app.post("/wishlist/add", (req, res) => {
 app.get("/wishlist/user/:userId", (req, res) => {
     const userId = req.params.userId;
 
-    let query = `SELECT * FROM WISHLIST WHERE USER_ID = ?`;
+    let query = `        SELECT WISHLIST.PRODUCT_ID, PRODUCT.NAME, PRODUCT.DESCRIPTION, PRODUCT.PRICE
+        FROM WISHLIST
+        INNER JOIN PRODUCT ON WISHLIST.PRODUCT_ID = PRODUCT.ID
+        WHERE WISHLIST.USER_ID = ?`;
 
     db.all(query,[userId] ,(err, rows) => {
         if (err) {
@@ -394,6 +393,45 @@ app.delete("/wishlist/remove/:userId/:productId", (req, res) => {
         } else {
             return res.status(200).send("Product removed from wishlist successfully");
         }
+    });
+});
+
+
+app.post("/wishlist/add-to-cart", (req, res) => {
+    const userId = req.body.userId;
+    const productId = req.body.productId;
+    const quantity = req.body.quantity || 1; 
+
+  
+    let checkQuery = `SELECT * FROM WISHLIST WHERE USER_ID = ? AND PRODUCT_ID = ?`;
+    db.get(checkQuery, [userId, productId], (err, wishlistItem) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Error checking wishlist");
+        }
+
+        if (!wishlistItem) {
+            return res.status(404).send("Product not found in wishlist");
+        }
+
+   
+        let cartQuery = `INSERT INTO CART (USER_ID, PRODUCT_ID, QUANTITY) VALUES (?, ?, ?)`;
+        db.run(cartQuery, [userId, productId, quantity], (err) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send("Error adding product to cart");
+            }
+
+      
+            let removeQuery = `DELETE FROM WISHLIST WHERE USER_ID = ? AND PRODUCT_ID = ?`;
+            db.run(removeQuery, [userId, productId], (err) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).send("Error removing product from wishlist");
+                }
+                return res.status(200).send("Product moved to cart successfully");
+            });
+        });
     });
 });
 
@@ -471,6 +509,10 @@ app.listen(port,()=>{
             if(err)
                 console.log("error creating Players Table"+err)
         });
+        db.run(db_access.createWishlistTable,(err)=>{
+            if(err)
+                console.log("error creating whishlist table")
+        })
 
       
     })

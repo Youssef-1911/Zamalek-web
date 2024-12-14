@@ -1,16 +1,23 @@
-.club-store {
+.player-view {
     max-width: 1200px;
     margin: 20px auto;
     padding: 0 20px;
   }
   
-  .club-store h1 {
+  .player-view h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .player-view h2 {
     color: white;
     text-align: center;
     margin-bottom: 30px;
+    font-family: 'Arial', sans-serif;
   }
   
-  .club-store ul {
+  .player-view ul {
     list-style: none;
     padding: 0;
     display: grid;
@@ -18,23 +25,33 @@
     gap: 20px;
   }
   
-  .club-store li {
+  .player-view li {
     background: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
   }
   
-  .club-store button {
+  .player-view li:hover {
+    transform: translateY(-5px);
+  }
+  
+  .player-view strong {
+    color: #e31b23;
+  }
+  
+  .player-view button {
     background: #e31b23;
     color: white;
     border: none;
-    padding: 8px 16px;
-    margin: 5px;
+    padding: 10px 20px;
+    margin: 20px auto;
     border-radius: 4px;
     cursor: pointer;
+    display: block;
   }
   
-  .club-store button:hover {
+  .player-view button:hover {
     background: #bf151b;
   }
