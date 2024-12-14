@@ -85,7 +85,7 @@ app.post("/user/login", (req, res) => {
         })
     })
 })
-app.post(`/products/add`,verifyToken, (req, res) => {
+app.post(`/products/add`, (req, res) => {
     let name = req.body.name;
     let description = req.body.description;
     let price = req.body.price;
